@@ -1,5 +1,5 @@
 //
-//  ProgressView.swift
+//  CircularProgressView.swift
 //  
 //
 //  Created by Aman Joshi on 25/05/21.
@@ -7,25 +7,27 @@
 
 import UIKit
 
-public class ProgressView: UIView {
+public class CircularProgressView: UIView {
 
   let colors: [UIColor]
   let lineWidth: CGFloat
+  let width:CGFloat
 
   private lazy var shapeLayer: ProgressShapeLayer = {
     return ProgressShapeLayer(strokeColor: colors[1], lineWidth: lineWidth)
   }()
 
-  public init(frame:CGRect, colors:[UIColor], lineWidth:CGFloat) {
+  public init(frame:CGRect, colors:[UIColor], lineWidth:CGFloat,width:CGFloat) {
     self.colors = colors
     self.lineWidth = lineWidth
+    self.width = width
     super.init(frame: frame)
     self.backgroundColor = .clear
   }
 
 
-  public convenience init(colors: [UIColor], lineWidth: CGFloat) {
-    self.init(frame: .zero, colors: colors, lineWidth: lineWidth)
+  public convenience init(colors: [UIColor], lineWidth: CGFloat,width:CGFloat) {
+    self.init(frame: .zero, colors: colors, lineWidth: lineWidth,width:width)
   }
 
 
@@ -37,14 +39,15 @@ public class ProgressView: UIView {
     super.layoutSubviews()
     self.layer.cornerRadius = self.frame.width / 2
 
-    // create an oval path
+    // create a path for shape layer
     let path = UIBezierPath(ovalIn: CGRect(x: 0, y: 0, width: self.bounds.width, height: self.bounds.width))
 
+    // add path to shape layer
     shapeLayer.path = path.cgPath
   }
 }
 
-extension ProgressView {
+extension CircularProgressView {
 
   // MARK: - Animations
   func animateStroke() {
@@ -94,29 +97,3 @@ extension ProgressView {
 
 }
 
-extension UIView {
-
-  public func show(_ view:ProgressView) {
-    self.addSubview(view)
-    view.translatesAutoresizingMaskIntoConstraints = false
-    NSLayoutConstraint.activate([
-      view.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-      view.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-      view.widthAnchor.constraint(equalToConstant: 60),
-      view.heightAnchor.constraint(equalTo: view.widthAnchor)
-    ])
-    view.animateStroke()
-    view.animateRotation()
-  }
-
-  public func stop(_ view:ProgressView) {
-    if self.subviews.contains(view) {
-      for subview in self.subviews {
-        if let progressView = subview as? ProgressView {
-          progressView.removeFromSuperview()
-          return
-        }
-      }
-    }
-  }
-}
