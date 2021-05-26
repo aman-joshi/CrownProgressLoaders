@@ -31,14 +31,13 @@ public class StandardProgressView: UIView {
     return label
   }()
 
-  public init(frame: CGRect, message:String = "Loading...") {
+  init(frame: CGRect, message:String) {
     self.message = message
     super.init(frame: frame)
   }
 
   public convenience init(message:String = "Loading...") {
-    self.init(frame: .zero)
-    self.message = message
+    self.init(frame: .zero, message:message)
   }
 
   required init?(coder: NSCoder) {
