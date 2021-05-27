@@ -9,7 +9,6 @@ import UIKit
 
 public class ReplicatorProgressView: UIView {
 
-
   let lengthMultiplier: CGFloat = 3.0
   let replicatorLayer = CAReplicatorLayer()
   let instanceLayer = CALayer()
@@ -17,12 +16,8 @@ public class ReplicatorProgressView: UIView {
   let width:CGFloat = 160.0
 
 
-  public override init(frame:CGRect) {
+  public override init(frame:CGRect = .zero) {
     super.init(frame: frame)
-  }
-
-  public convenience init() {
-    self.init(frame:.zero)
   }
 
   required init?(coder: NSCoder) {
@@ -45,12 +40,12 @@ extension ReplicatorProgressView {
     replicatorLayer.frame = self.bounds
     let count:CGFloat = 12.0
     replicatorLayer.instanceCount = Int(count)
-    replicatorLayer.instanceDelay = CFTimeInterval(1.0 / count)
+    replicatorLayer.instanceDelay = CFTimeInterval(0.05)
     replicatorLayer.instanceColor = UIColor.white.cgColor
     replicatorLayer.instanceRedOffset = 0.0
-    replicatorLayer.instanceGreenOffset = -0.05
-    replicatorLayer.instanceBlueOffset = -0.05
-    replicatorLayer.instanceAlphaOffset = 0.0
+    replicatorLayer.instanceGreenOffset = -1.0
+    replicatorLayer.instanceBlueOffset = -1.0
+    replicatorLayer.instanceAlphaOffset = -0.08
 
     let angle = Float.pi * 2.0 / Float(count)
     replicatorLayer.instanceTransform =
@@ -76,7 +71,7 @@ extension ReplicatorProgressView {
     fadeAnimation.fromValue = 1.0
     fadeAnimation.toValue = 0.0
     fadeAnimation.repeatCount = Float(Int.max)
-    replicatorLayer.add(fadeAnimation, forKey: nil)
+    instanceLayer.add(fadeAnimation, forKey: nil)
   }
 
 

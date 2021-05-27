@@ -12,6 +12,7 @@ public class CircularProgressView: UIView {
   let colors: [UIColor]
   let lineWidth: CGFloat
   let width:CGFloat
+  let iconLayer = CALayer()
 
   private lazy var shapeLayer: ProgressShapeLayer = {
     return ProgressShapeLayer(strokeColor: colors[1], lineWidth: lineWidth)
@@ -43,6 +44,7 @@ public class CircularProgressView: UIView {
     let path = UIBezierPath(ovalIn: CGRect(x: 0, y: 0, width: self.bounds.width, height: self.bounds.width))
 
     // add path to shape layer
+
     shapeLayer.path = path.cgPath
   }
 }
