@@ -24,6 +24,18 @@ https://user-images.githubusercontent.com/81283951/119804367-e735d400-befd-11eb-
 
 ## ReplicatorProgressView
 
+# Requirements
 
+Swift 5.0 and higher versions
+
+Target deployment iOS 13.0 and higher.
+
+# Installation
+
+CrownProgressLoader is available through Swift Package Manager.
+
+Go to File -> Swift Packages -> Add Package Dependency 
+
+Enter the url of this repo and Xcode will choose the current version and link it to your project.
 
 
